@@ -7,10 +7,12 @@ import selectors
 
 stopped = False
 
+
 def parse_links(response):
     return set(
         re.findall(r'''(?i)href=["']?([^\s"'<>]+)''',
                    response.split(b'\r\n\r\n', 1)[1].decode('utf-8')))
+
 
 class Fetcher:
     def __init__(self, hostname, url, selector):
@@ -26,12 +28,13 @@ class Fetcher:
 
     def start(self):
         try:
-          self.raw_sock.connect((self.hostname, 443))
+            self.raw_sock.connect((self.hostname, 443))
         except BlockingIOError:
             pass
 
         # 當 raw_sock 可以寫的時候呼叫 self.connected
-        self.selector.register(self.raw_sock.fileno(), selectors.EVENT_WRITE, self.connected)
+        self.selector.register(self.raw_sock.fileno(), selectors.EVENT_WRITE,
+                               self.connected)
 
     def connected(self, key, _):
         # convert to ssl connection
@@ -41,11 +44,14 @@ class Fetcher:
         context.load_default_certs()
 
         sock = self.raw_sock
-        self.sock = context.wrap_socket(sock, server_hostname=self.hostname, do_handshake_on_connect=False)
+        self.sock = context.wrap_socket(sock,
+                                        server_hostname=self.hostname,
+                                        do_handshake_on_connect=False)
 
         # 當 sock 可以讀的時候呼叫 self.connected
         self.selector.unregister(key.fd)
-        self.selector.register(self.sock.fileno(), selectors.EVENT_WRITE, self.do_handshake)
+        self.selector.register(self.sock.fileno(), selectors.EVENT_WRITE,
+                               self.do_handshake)
 
     def do_handshake(self, key, _):
         try:
@@ -54,13 +60,15 @@ class Fetcher:
             if not self.waiting_reading:
                 self.waiting_reading = True
                 self.selector.unregister(key.fd)
-                self.selector.register(key.fd, selectors.EVENT_READ, self.do_handshake)
+                self.selector.register(key.fd, selectors.EVENT_READ,
+                                       self.do_handshake)
 
         except ssl.SSLWantWriteError:
             if self.waiting_reading:
                 self.waiting_reading = False
                 self.selector.unregister(key.fd)
-                self.selector.register(key.fd, selectors.EVENT_WRITE, self.do_handshake)
+                self.selector.register(key.fd, selectors.EVENT_WRITE,
+                                       self.do_handshake)
         else:
             self.selector.unregister(key.fd)
 
@@ -69,7 +77,8 @@ class Fetcher:
             self.sock.send(request.encode('ascii'))
 
             # 當 sock 可以讀的時候呼叫 self.read_response
-            self.selector.register(key.fd, selectors.EVENT_READ, self.read_response)
+            self.selector.register(key.fd, selectors.EVENT_READ,
+                                   self.read_response)
 
     def read_response(self, key, _):
         global stopped
@@ -84,6 +93,7 @@ class Fetcher:
                 self.callback(links)
                 stopped = True
         except ssl.SSLWantReadError:
+            # 忽略 ssl socket 的內容不足的錯誤
             pass
 
     def set_callback(self, callback):
@@ -97,8 +107,10 @@ def loop(selector):
             callback = key.data
             callback(key, mask)
 
+
 def on_completed(links):
     pprint.pprint(links)
+
 
 if __name__ == '__main__':
     selector = selectors.DefaultSelector()
@@ -107,4 +119,3 @@ if __name__ == '__main__':
     fetcher.set_callback(on_completed)
     fetcher.start()
     loop(selector)
-
