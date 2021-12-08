@@ -48,7 +48,7 @@ class Fetcher:
                                         server_hostname=self.hostname,
                                         do_handshake_on_connect=False)
 
-        # 當 sock 可以讀的時候呼叫 self.connected
+        # 當 sock 可以讀的時候呼叫 self.do_handshake
         self.selector.unregister(key.fd)
         self.selector.register(self.sock.fileno(), selectors.EVENT_WRITE,
                                self.do_handshake)

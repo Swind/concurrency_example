@@ -1,5 +1,6 @@
 import socket
 import re
+import ssl
 
 import selectors
 
@@ -24,6 +25,10 @@ class Future:
         self.result = result
         for fn in self._callbacks:
             fn(self)
+
+    def reset(self):
+        self._callbacks.clear()
+        self.result = None
 
 
 class Task:
@@ -56,23 +61,52 @@ class Fetcher:
     def fetch(self):
         global stopped
 
-        # Connect
+        yield from self.connect()
+        print("connected")
+
+        yield from self.do_handshake()
+        print("do_handshake done")
+
+        stopped = True
+
+    def connect(self):
+        future = Future()
         try:
             self.raw_sock.connect((self.hostname, 443))
         except BlockingIOError:
             pass
-
-        future = Future()
 
         self.selector.register(self.raw_sock.fileno(), selectors.EVENT_WRITE,
                                lambda key, mask: future.set_result(None))
         yield future
 
         self.selector.unregister(self.raw_sock.fileno())
-        print("connected")
 
-        stopped = True
+    def do_handshake(self):
+        # convert to ssl connection
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS)
+        context.verify_mode = ssl.CERT_REQUIRED
+        context.check_hostname = True
+        context.load_default_certs()
+        self.sock = context.wrap_socket(self.raw_sock,
+                                        server_hostname=self.hostname,
+                                        do_handshake_on_connect=False)
+        future = Future()
+        self.selector.register(self.sock, selectors.EVENT_READ | selectors.EVENT_WRITE,
+                lambda key, mask: future.set_result(None))
+        # Do handshake
+        while True:
+            future.reset()
+            try:
+                self.sock.do_handshake()
+                self.selector.unregister(self.sock)
+                break
+            except ssl.SSLWantReadError:
+                pass
+            except ssl.SSLWantWriteError:
+                pass
 
+            yield future
 
 def loop(selector):
     while not stopped:
