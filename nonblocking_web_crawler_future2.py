@@ -67,6 +67,12 @@ class Fetcher:
         yield from self.do_handshake()
         print("do_handshake done")
 
+        self.send_request()
+        print("send request done")
+
+        links = yield from self.read_response()
+        print(links)
+
         stopped = True
 
     def connect(self):
@@ -107,6 +113,33 @@ class Fetcher:
                 pass
 
             yield future
+
+    def send_request(self):
+        request = "GET {} HTTP/1.0\r\nHost: {}\r\n\r\n".format(
+            self.url, self.hostname)
+        self.sock.send(request.encode('ascii'))
+
+    def read_response(self):
+        future = Future()
+        self.selector.register(self.sock, selectors.EVENT_READ,
+                lambda key, mask: future.set_result(None))
+
+        while True:
+            try:
+                future.reset()
+                yield future
+
+                chunk = self.sock.recv(1024)
+                if chunk:
+                    self.response += chunk
+                else:
+                    self.selector.unregister(self.sock)
+                    links = parse_links(self.response)
+                    return links
+            except ssl.SSLWantReadError:
+                # 忽略 ssl socket 的內容不足的錯誤
+                pass
+
 
 def loop(selector):
     while not stopped:
