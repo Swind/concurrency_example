@@ -70,7 +70,8 @@ class Fetcher:
         self.send_request()
         print("send request done")
 
-        links = yield from self.read_response()
+        response = yield from self.read_response()
+        links = parse_links(response)
         print(links)
 
         stopped = True
@@ -134,14 +135,13 @@ class Fetcher:
                     self.response += chunk
                 else:
                     self.selector.unregister(self.sock)
-                    links = parse_links(self.response)
-                    return links
+                    return self.response
             except ssl.SSLWantReadError:
                 # 忽略 ssl socket 的內容不足的錯誤
                 pass
 
 
-def loop(selector):
+def run_loop(selector):
     while not stopped:
         events = selector.select(timeout=1)
         for key, mask in events:
@@ -154,4 +154,4 @@ if __name__ == '__main__':
 
     fetcher = Fetcher('xkcd.com', '/', selector)
     Task(fetcher.fetch())
-    loop(selector)
+    run_loop(selector)
