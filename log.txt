@@ -1,0 +1,574 @@
+Fetching /
+Fetching / Done
+{'/3', '/2', '/8', '/4', '/1', '/9', '/5', '/6', '/10', '/7'}
+Fetching /3
+Fetching /2
+Fetching /8
+Fetching /4
+Fetching /1
+Fetching /9
+Fetching /5
+Fetching /6
+Fetching /10
+Fetching /7
+Fetching /6 Done
+{'/6/'}
+Fetching /7 Done
+{'/7/'}
+Fetching /3 Done
+{'/3/'}
+Fetching /5 Done
+{'/5/'}
+Fetching /4 Done
+{'/4/'}
+Fetching /2 Done
+{'/2/'}
+Fetching /8 Done
+{'/8/'}
+Fetching /9 Done
+{'/9/'}
+Fetching /1 Done
+{'/1/'}
+Fetching /10 Done
+{'/10/'}
+Fetching /5/
+Fetching /7/
+Fetching /2/
+Fetching /10/
+Fetching /9/
+Fetching /6/
+Fetching /4/
+Fetching /1/
+Fetching /8/
+Fetching /3/
+Fetching /3/ Done
+{'/3/1.html',
+ '/3/10.html',
+ '/3/2.html',
+ '/3/3.html',
+ '/3/4.html',
+ '/3/5.html',
+ '/3/6.html',
+ '/3/7.html',
+ '/3/8.html',
+ '/3/9.html'}
+Fetching /9/ Done
+{'/9/1.html',
+ '/9/10.html',
+ '/9/2.html',
+ '/9/3.html',
+ '/9/4.html',
+ '/9/5.html',
+ '/9/6.html',
+ '/9/7.html',
+ '/9/8.html',
+ '/9/9.html'}
+Fetching /6/ Done
+{'/6/1.html',
+ '/6/10.html',
+ '/6/2.html',
+ '/6/3.html',
+ '/6/4.html',
+ '/6/5.html',
+ '/6/6.html',
+ '/6/7.html',
+ '/6/8.html',
+ '/6/9.html'}
+Fetching /4/ Done
+{'/4/1.html',
+ '/4/10.html',
+ '/4/2.html',
+ '/4/3.html',
+ '/4/4.html',
+ '/4/5.html',
+ '/4/6.html',
+ '/4/7.html',
+ '/4/8.html',
+ '/4/9.html'}
+Fetching /1/ Done
+{'/1/1.html',
+ '/1/10.html',
+ '/1/2.html',
+ '/1/3.html',
+ '/1/4.html',
+ '/1/5.html',
+ '/1/6.html',
+ '/1/7.html',
+ '/1/8.html',
+ '/1/9.html'}
+Fetching /8/ Done
+{'/8/1.html',
+ '/8/10.html',
+ '/8/2.html',
+ '/8/3.html',
+ '/8/4.html',
+ '/8/5.html',
+ '/8/6.html',
+ '/8/7.html',
+ '/8/8.html',
+ '/8/9.html'}
+Fetching /5/ Done
+{'/5/1.html',
+ '/5/10.html',
+ '/5/2.html',
+ '/5/3.html',
+ '/5/4.html',
+ '/5/5.html',
+ '/5/6.html',
+ '/5/7.html',
+ '/5/8.html',
+ '/5/9.html'}
+Fetching /10/ Done
+{'/10/1.html',
+ '/10/10.html',
+ '/10/2.html',
+ '/10/3.html',
+ '/10/4.html',
+ '/10/5.html',
+ '/10/6.html',
+ '/10/7.html',
+ '/10/8.html',
+ '/10/9.html'}
+Fetching /2/ Done
+{'/2/1.html',
+ '/2/10.html',
+ '/2/2.html',
+ '/2/3.html',
+ '/2/4.html',
+ '/2/5.html',
+ '/2/6.html',
+ '/2/7.html',
+ '/2/8.html',
+ '/2/9.html'}
+Fetching /7/ Done
+{'/7/1.html',
+ '/7/10.html',
+ '/7/2.html',
+ '/7/3.html',
+ '/7/4.html',
+ '/7/5.html',
+ '/7/6.html',
+ '/7/7.html',
+ '/7/8.html',
+ '/7/9.html'}
+Fetching /9/3.html
+Fetching /1/8.html
+Fetching /6/8.html
+Fetching /3/4.html
+Fetching /1/1.html
+Fetching /5/8.html
+Fetching /3/3.html
+Fetching /10/8.html
+Fetching /10/10.html
+Fetching /4/10.html
+Fetching /10/4.html
+Fetching /9/4.html
+Fetching /3/5.html
+Fetching /4/9.html
+Fetching /8/2.html
+Fetching /8/5.html
+Fetching /3/8.html
+Fetching /10/3.html
+Fetching /3/10.html
+Fetching /8/3.html
+Fetching /4/5.html
+Fetching /1/3.html
+Fetching /7/4.html
+Fetching /6/9.html
+Fetching /7/5.html
+Fetching /4/1.html
+Fetching /2/4.html
+Fetching /2/5.html
+Fetching /5/7.html
+Fetching /2/7.html
+Fetching /3/1.html
+Fetching /7/2.html
+Fetching /4/2.html
+Fetching /6/2.html
+Fetching /10/6.html
+Fetching /6/1.html
+Fetching /5/9.html
+Fetching /1/9.html
+Fetching /5/2.html
+Fetching /1/5.html
+Fetching /7/7.html
+Fetching /3/7.html
+Fetching /2/3.html
+Fetching /7/9.html
+Fetching /8/4.html
+Fetching /6/3.html
+Fetching /5/5.html
+Fetching /5/1.html
+Fetching /7/1.html
+Fetching /9/6.html
+Fetching /6/10.html
+Fetching /8/9.html
+Fetching /1/7.html
+Fetching /5/3.html
+Fetching /4/4.html
+Fetching /7/3.html
+Fetching /9/5.html
+Fetching /6/5.html
+Fetching /4/6.html
+Fetching /6/6.html
+Fetching /1/10.html
+Fetching /8/8.html
+Fetching /5/4.html
+Fetching /6/7.html
+Fetching /5/10.html
+Fetching /4/8.html
+Fetching /9/10.html
+Fetching /7/10.html
+Fetching /1/6.html
+Fetching /2/10.html
+Fetching /2/8.html
+Fetching /2/1.html
+Fetching /6/4.html
+Fetching /9/1.html
+Fetching /4/7.html
+Fetching /8/1.html
+Fetching /8/10.html
+Fetching /1/2.html
+Fetching /2/2.html
+Fetching /2/6.html
+Fetching /10/5.html
+Fetching /9/2.html
+Fetching /1/4.html
+Fetching /8/6.html
+Fetching /9/7.html
+Fetching /7/6.html
+Fetching /9/9.html
+Fetching /10/2.html
+Fetching /3/2.html
+Fetching /8/7.html
+Fetching /10/9.html
+Fetching /9/8.html
+Fetching /5/6.html
+Fetching /3/9.html
+Fetching /10/1.html
+Fetching /2/9.html
+Fetching /10/7.html
+Fetching /7/8.html
+Fetching /3/6.html
+Fetching /4/3.html
+Fetching /8/5.html Done
+set()
+Fetching /1/8.html Done
+set()
+Fetching /8/2.html Done
+set()
+Fetching /3/5.html Done
+set()
+Fetching /9/4.html Done
+set()
+Fetching /10/10.html Done
+set()
+Fetching /6/8.html Done
+set()
+Fetching /4/10.html Done
+set()
+Fetching /9/3.html Done
+set()
+Fetching /3/3.html Done
+set()
+Fetching /1/1.html Done
+set()
+Fetching /5/8.html Done
+set()
+Fetching /10/8.html Done
+set()
+Fetching /4/9.html Done
+set()
+Fetching /10/4.html Done
+set()
+Fetching /3/4.html Done
+set()
+Fetching /4/1.html Done
+set()
+Fetching /2/4.html Done
+set()
+Fetching /7/5.html Done
+set()
+Fetching /2/5.html Done
+set()
+Fetching /3/10.html Done
+set()
+Fetching /7/4.html Done
+set()
+Fetching /3/8.html Done
+set()
+Fetching /10/3.html Done
+set()
+Fetching /3/1.html Done
+set()
+Fetching /4/5.html Done
+set()
+Fetching /5/7.html Done
+set()
+Fetching /1/3.html Done
+set()
+Fetching /2/7.html Done
+set()
+Fetching /6/9.html Done
+set()
+Fetching /7/9.html Done
+set()
+Fetching /3/7.html Done
+set()
+Fetching /5/2.html Done
+set()
+Fetching /7/2.html Done
+set()
+Fetching /6/1.html Done
+set()
+Fetching /8/3.html Done
+set()
+Fetching /1/5.html Done
+set()
+Fetching /6/2.html Done
+set()
+Fetching /1/9.html Done
+set()
+Fetching /6/3.html Done
+set()
+Fetching /10/6.html Done
+set()
+Fetching /5/5.html Done
+set()
+Fetching /5/9.html Done
+set()
+Fetching /9/5.html Done
+set()
+Fetching /7/1.html Done
+set()
+Fetching /6/10.html Done
+set()
+Fetching /6/6.html Done
+set()
+Fetching /4/4.html Done
+set()
+Fetching /1/7.html Done
+set()
+Fetching /7/7.html Done
+set()
+Fetching /8/4.html Done
+set()
+Fetching /4/2.html Done
+set()
+Fetching /2/3.html Done
+set()
+Fetching /5/1.html Done
+set()
+Fetching /6/7.html Done
+set()
+Fetching /9/1.html Done
+set()
+Fetching /2/2.html Done
+set()
+Fetching /5/10.html Done
+set()
+Fetching /6/4.html Done
+set()
+Fetching /2/6.html Done
+set()
+Fetching /1/10.html Done
+set()
+Fetching /6/5.html Done
+set()
+Fetching /7/3.html Done
+set()
+Fetching /9/6.html Done
+set()
+Fetching /4/6.html Done
+set()
+Fetching /5/4.html Done
+set()
+Fetching /5/3.html Done
+set()
+Fetching /9/10.html Done
+set()
+Fetching /8/8.html Done
+set()
+Fetching /8/10.html Done
+set()
+Fetching /4/7.html Done
+set()
+Fetching /8/9.html Done
+set()
+Fetching /2/8.html Done
+set()
+Fetching /7/10.html Done
+set()
+Fetching /2/1.html Done
+set()
+Fetching /10/2.html Done
+set()
+Fetching /9/8.html Done
+set()
+Fetching /3/2.html Done
+set()
+Fetching /3/9.html Done
+set()
+Fetching /1/2.html Done
+set()
+Fetching /7/8.html Done
+set()
+Fetching /9/2.html Done
+set()
+Fetching /4/3.html Done
+set()
+Fetching /9/9.html Done
+set()
+Fetching /3/6.html Done
+set()
+Fetching /1/6.html Done
+set()
+Fetching /2/10.html Done
+set()
+Fetching /10/5.html Done
+set()
+Fetching /8/7.html Done
+set()
+Fetching /10/9.html Done
+set()
+Fetching /1/4.html Done
+set()
+Fetching /10/7.html Done
+set()
+Fetching /10/1.html Done
+set()
+Fetching /8/6.html Done
+set()
+Fetching /4/8.html Done
+set()
+Fetching /5/6.html Done
+set()
+Fetching /7/6.html Done
+set()
+Fetching /2/9.html Done
+set()
+Fetching /8/1.html Done
+set()
+Fetching /9/7.html Done
+set()
+{'/',
+ '/1',
+ '/1/',
+ '/1/1.html',
+ '/1/10.html',
+ '/1/2.html',
+ '/1/3.html',
+ '/1/4.html',
+ '/1/5.html',
+ '/1/6.html',
+ '/1/7.html',
+ '/1/8.html',
+ '/1/9.html',
+ '/10',
+ '/10/',
+ '/10/1.html',
+ '/10/10.html',
+ '/10/2.html',
+ '/10/3.html',
+ '/10/4.html',
+ '/10/5.html',
+ '/10/6.html',
+ '/10/7.html',
+ '/10/8.html',
+ '/10/9.html',
+ '/2',
+ '/2/',
+ '/2/1.html',
+ '/2/10.html',
+ '/2/2.html',
+ '/2/3.html',
+ '/2/4.html',
+ '/2/5.html',
+ '/2/6.html',
+ '/2/7.html',
+ '/2/8.html',
+ '/2/9.html',
+ '/3',
+ '/3/',
+ '/3/1.html',
+ '/3/10.html',
+ '/3/2.html',
+ '/3/3.html',
+ '/3/4.html',
+ '/3/5.html',
+ '/3/6.html',
+ '/3/7.html',
+ '/3/8.html',
+ '/3/9.html',
+ '/4',
+ '/4/',
+ '/4/1.html',
+ '/4/10.html',
+ '/4/2.html',
+ '/4/3.html',
+ '/4/4.html',
+ '/4/5.html',
+ '/4/6.html',
+ '/4/7.html',
+ '/4/8.html',
+ '/4/9.html',
+ '/5',
+ '/5/',
+ '/5/1.html',
+ '/5/10.html',
+ '/5/2.html',
+ '/5/3.html',
+ '/5/4.html',
+ '/5/5.html',
+ '/5/6.html',
+ '/5/7.html',
+ '/5/8.html',
+ '/5/9.html',
+ '/6',
+ '/6/',
+ '/6/1.html',
+ '/6/10.html',
+ '/6/2.html',
+ '/6/3.html',
+ '/6/4.html',
+ '/6/5.html',
+ '/6/6.html',
+ '/6/7.html',
+ '/6/8.html',
+ '/6/9.html',
+ '/7',
+ '/7/',
+ '/7/1.html',
+ '/7/10.html',
+ '/7/2.html',
+ '/7/3.html',
+ '/7/4.html',
+ '/7/5.html',
+ '/7/6.html',
+ '/7/7.html',
+ '/7/8.html',
+ '/7/9.html',
+ '/8',
+ '/8/',
+ '/8/1.html',
+ '/8/10.html',
+ '/8/2.html',
+ '/8/3.html',
+ '/8/4.html',
+ '/8/5.html',
+ '/8/6.html',
+ '/8/7.html',
+ '/8/8.html',
+ '/8/9.html',
+ '/9',
+ '/9/',
+ '/9/1.html',
+ '/9/10.html',
+ '/9/2.html',
+ '/9/3.html',
+ '/9/4.html',
+ '/9/5.html',
+ '/9/6.html',
+ '/9/7.html',
+ '/9/8.html',
+ '/9/9.html'}
