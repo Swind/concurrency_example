@@ -34,13 +34,14 @@ class Fetcher:
     log("Fetching {}".format(self.url))
 
     await self.connect()
+
     self.send_request()
+
     response = await self.read_response()
     links = parse_links(self.url, response)
 
     log("Fetching {} Done".format(self.url))
-
-    await self.callback(links)
+    self.callback(links)
 
   async def connect(self):
     context = ssl.SSLContext(ssl.PROTOCOL_TLS)
@@ -61,7 +62,7 @@ class Fetcher:
     response = b''
     # read response
     while True:
-      chunk = await self.reader.read(1024)
+      chunk = await self.reader.read(4096)
       if chunk:
         response += chunk
       else:
@@ -70,41 +71,38 @@ class Fetcher:
     return response
 
 class Crawler:
-  def __init__(self, hostname, loop):
+  def __init__(self, hostname):
     self.hostname = hostname
-    self.loop = loop
     self.urls = set()
+    self.tasks = []
 
-  async def on_fetch_done(self, urls):
+  def on_fetch_done(self, urls):
     new_urls = urls.difference(self.urls) 
     self.urls.update(new_urls)
 
-    await self._start(new_urls)
+    self._start(new_urls)
 
   async def start(self, start_url):
     self.urls.add(start_url)
 
     urls = [start_url]
-    await self._start(urls)
+    self._start(urls)
 
-  async def _start(self, urls):
-    tasks = []
+    for task in self.tasks:
+      await task
+
+  def _start(self, urls):
     for url in urls:
       fetcher = Fetcher(self.hostname, url, self.on_fetch_done)
-      tasks.append(self.loop.create_task(fetcher.fetch()))
+      self.tasks.append(asyncio.create_task(fetcher.fetch()))
 
-    await asyncio.gather(*tasks)
 
-def run_loop(loop):
+async def test():
   start_time = time.time()
-  crawler = Crawler('oracle.code-life.info', loop)
-  loop.run_until_complete(crawler.start('/'))
+  crawler = Crawler('oracle.code-life.info')
+  await crawler.start('/')
   end_time = time.time()
   print("elapsed time: {}".format(end_time - start_time))
-  pprint.pprint(crawler.urls)
-
-
 
 if __name__ == '__main__':
-  loop = asyncio.get_event_loop()
-  run_loop(loop)
+  asyncio.run(test())
