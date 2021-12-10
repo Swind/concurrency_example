@@ -6,6 +6,7 @@ import threading
 
 import time
 
+
 def create_ssl_socket(hostname):
   # SSL
   context = ssl.SSLContext(ssl.PROTOCOL_TLS)
@@ -35,7 +36,7 @@ class Fetcher:
     self.sock = create_ssl_socket(hostname)
 
   def fetch(self):
-    start_time = time.time() 
+    start_time = time.time()
     self.sock.connect((self.hostname, 443))
 
     request = "GET {} HTTP/1.0\r\nHost: {}\r\n\r\n".format(self.url, self.hostname)
@@ -52,13 +53,14 @@ class Fetcher:
 
     self.callback(urls)
 
+
 class Crawler:
   def __init__(self, hostname):
     self.hostname = hostname
     self.urls = set()
 
   def on_fetch_done(self, urls):
-    new_urls = urls.difference(self.urls) 
+    new_urls = urls.difference(self.urls)
     self.urls.update(new_urls)
 
     self._start(new_urls)
@@ -70,9 +72,10 @@ class Crawler:
     self._start(urls)
 
   def _start(self, urls):
-    for url in urls: 
+    for url in urls:
       fetcher = Fetcher(self.hostname, url, self.on_fetch_done)
       threading.Thread(target=fetcher.fetch).start()
+
 
 def test():
   start_time = time.time()
@@ -94,5 +97,4 @@ def test():
 
 
 if __name__ == '__main__':
-  for i in range(0, 100):
-    test() 
+  test()
