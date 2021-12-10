@@ -20,7 +20,7 @@ def caller_fn2():
       break
 
 
-def run_call():
+def run_caller():
 
   # 呼叫的時候也不是回傳 function 執行結果，而是一個 generator,
   # 它裡面會有 gi_frame, gi_code, gi_running 等屬性，來儲存 gen_fn 執行的狀態
@@ -88,4 +88,5 @@ def run_caller2():
 
 
 if __name__ == "__main__":
+  #run_caller()
   run_caller2()

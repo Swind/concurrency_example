@@ -2,9 +2,11 @@ import socket
 import re
 import ssl
 import pprint
+import time
 
+def fetch(hostname: str, url: str):
+  start_time = time.time()
 
-def fetch(url: str):
   # SSL
   context = ssl.SSLContext(ssl.PROTOCOL_TLS)
   context.verify_mode = ssl.CERT_REQUIRED
@@ -13,8 +15,8 @@ def fetch(url: str):
 
   # Connect to website
   s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-  ssl_sock = context.wrap_socket(s, server_hostname='xkcd.com')
-  ssl_sock.connect(('xkcd.com', 443))
+  ssl_sock = context.wrap_socket(s, server_hostname=hostname)
+  ssl_sock.connect((hostname, 443))
 
   # Send request
   ssl_sock.sendall("GET {} HTTP/1.0\r\nHost: xkcd.com\r\n\r\n".format(url).encode('ascii'))
@@ -24,13 +26,21 @@ def fetch(url: str):
   while chunk:
     response += chunk
     chunk = ssl_sock.recv(4096)
+  
+  connection_time = time.time() 
 
   # Parse the response
   urls = set(
       re.findall(r'''(?i)href=["']?([^\s"'<>]+)''',
                  response.split(b'\r\n\r\n', 1)[1].decode('utf-8')))
+
+  parser_time = time.time()
+
+  print(f"Connection: {connection_time - start_time}")
+  print(f"Parse: {parser_time - connection_time}")
+
   return urls
 
 
 if __name__ == '__main__':
-  pprint.pprint(fetch("/"))
+  fetch('oracle.code-life.info', '/')

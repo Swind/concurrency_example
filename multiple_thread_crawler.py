@@ -2,6 +2,7 @@ import pprint
 import socket
 import re
 import ssl
+import threading
 
 import time
 
@@ -25,9 +26,10 @@ def parse_links(response):
 
 
 class Fetcher:
-  def __init__(self, hostname, url):
+  def __init__(self, hostname, url, callback=None):
     self.hostname = hostname
     self.url = url
+    self.callback = callback
 
     self.response = b''
     self.sock = create_ssl_socket(hostname)
@@ -35,7 +37,6 @@ class Fetcher:
   def fetch(self):
     start_time = time.time() 
     self.sock.connect((self.hostname, 443))
-    connect_time = time.time()
 
     request = "GET {} HTTP/1.0\r\nHost: {}\r\n\r\n".format(self.url, self.hostname)
     self.sock.send(request.encode('ascii'))
@@ -46,20 +47,52 @@ class Fetcher:
     while chunk:
       response += chunk
       chunk = self.sock.recv(4096)
-    read_time = time.time()
 
     urls = parse_links(response)
-    parse_time = time.time()
 
-    print(f"Connect: {connect_time - start_time:.10f}s")
-    print(f"Send: {send_time - connect_time:.10f}s")
-    print(f"Read: {read_time - send_time:.10f}s")
-    print(f'Parse: {parse_time - read_time:.10f}s')
-    return urls
+    self.callback(urls)
+
+class Crawler:
+  def __init__(self, hostname):
+    self.hostname = hostname
+    self.urls = set()
+
+  def on_fetch_done(self, urls):
+    new_urls = urls.difference(self.urls) 
+    self.urls.update(new_urls)
+
+    self._start(new_urls)
+
+  def start(self, start_url):
+    self.urls.add(start_url)
+
+    urls = [start_url]
+    self._start(urls)
+
+  def _start(self, urls):
+    for url in urls: 
+      fetcher = Fetcher(self.hostname, url, self.on_fetch_done)
+      threading.Thread(target=fetcher.fetch).start()
+
+def test():
+  start_time = time.time()
+
+  crawler = Crawler('oracle.code-life.info')
+  crawler.start('/')
+
+  while True:
+    threads = threading.enumerate()
+    if len(threads) == 1:
+      break
+
+    for thread in threads:
+      if thread.name != 'MainThread':
+        thread.join()
+
+  end_time = time.time()
+  print("elapsed time: {}".format(end_time - start_time))
 
 
 if __name__ == '__main__':
-  #fetcher = Fetcher('oracle.code-life.info', '/')
-  fetcher = Fetcher('github.com', '/')
-  urls = fetcher.fetch()
-  #pprint.pprint(urls)
+  for i in range(0, 100):
+    test() 

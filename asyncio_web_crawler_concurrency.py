@@ -2,9 +2,16 @@ import asyncio
 import ssl
 import re
 import itertools
+import time
 
 from urllib.parse import urljoin
 import pprint
+
+debug = False
+
+def log(message):
+  if(debug):
+    print(message)
 
 
 def parse_links(root_url, response):
@@ -16,21 +23,24 @@ def parse_links(root_url, response):
 
 
 class Fetcher:
-  def __init__(self, hostname, url):
+  def __init__(self, hostname, url, callback):
     self.hostname = hostname
     self.url = url
     self.reader = None
     self.writer = None
+    self.callback = callback
 
   async def fetch(self):
-    print("Fetching {}".format(self.url))
+    log("Fetching {}".format(self.url))
+
     await self.connect()
     self.send_request()
     response = await self.read_response()
     links = parse_links(self.url, response)
-    print("Fetching {} Done".format(self.url))
-    pprint.pprint(links)
-    return links
+
+    log("Fetching {} Done".format(self.url))
+
+    await self.callback(links)
 
   async def connect(self):
     context = ssl.SSLContext(ssl.PROTOCOL_TLS)
@@ -65,29 +75,36 @@ class Crawler:
     self.loop = loop
     self.urls = set()
 
+  async def on_fetch_done(self, urls):
+    new_urls = urls.difference(self.urls) 
+    self.urls.update(new_urls)
+
+    await self._start(new_urls)
+
   async def start(self, start_url):
     self.urls.add(start_url)
 
     urls = [start_url]
+    await self._start(urls)
+
+  async def _start(self, urls):
     tasks = []
+    for url in urls:
+      fetcher = Fetcher(self.hostname, url, self.on_fetch_done)
+      tasks.append(self.loop.create_task(fetcher.fetch()))
 
-    while urls:
-      for url in urls:
-        fetcher = Fetcher(self.hostname, url)
-        tasks.append(self.loop.create_task(fetcher.fetch()))
+    await asyncio.gather(*tasks)
 
-      result = await asyncio.gather(*tasks)
-      result = set(itertools.chain(*result))
-      urls = result.difference(self.urls)
-      self.urls.update(result)
-
-    pprint.pprint(self.urls)
-
-def run_loop():
-  loop = asyncio.get_event_loop()
+def run_loop(loop):
+  start_time = time.time()
   crawler = Crawler('oracle.code-life.info', loop)
   loop.run_until_complete(crawler.start('/'))
+  end_time = time.time()
+  print("elapsed time: {}".format(end_time - start_time))
+  pprint.pprint(crawler.urls)
+
 
 
 if __name__ == '__main__':
-  run_loop()
+  loop = asyncio.get_event_loop()
+  run_loop(loop)
