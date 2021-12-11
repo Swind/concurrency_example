@@ -2,11 +2,15 @@ import socket
 import re
 import ssl
 import pprint
+import time
 
 import selectors
 
 stopped = False
 
+"""
+nonblocking socket + callback 架構
+"""
 
 def parse_links(response):
   return set(
@@ -96,7 +100,7 @@ class Fetcher:
 
 def loop(selector):
   while not stopped:
-    events = selector.select(timeout=1)
+    events = selector.select()
     for key, mask in events:
       callback = key.data
       callback(key, mask)
@@ -108,8 +112,10 @@ def on_completed(links):
 
 if __name__ == '__main__':
   selector = selectors.DefaultSelector()
-
-  fetcher = Fetcher('xkcd.com', '/', selector)
+  start_time = time.time()
+  fetcher = Fetcher('oracle.code-life.info', '/', selector)
   fetcher.set_callback(on_completed)
   fetcher.start()
   loop(selector)
+  end_time = time.time()
+  print(f"time: {end_time - start_time}")

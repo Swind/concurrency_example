@@ -6,6 +6,9 @@ import selectors
 
 stopped = False
 
+"""
+nonblocking socket + yield + yield from 架構
+"""
 
 def parse_links(response):
   return set(

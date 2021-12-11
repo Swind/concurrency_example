@@ -6,6 +6,10 @@ import ssl
 import time
 from urllib.parse import urljoin
 
+"""
+用 blocking socket 分析 oracle.code-life.info 底下所有的網頁
+"""
+
 def parse_links(root_url, response):
   result = set(
       re.findall(r'''(?i)href=["']?([^\s"'<>]+)''',

@@ -2,6 +2,10 @@ import asyncio
 import ssl
 import re
 
+"""
+使用 python 內建的 asyncio 實做 Fetcher
+"""
+
 
 def parse_links(response):
   return set(
@@ -60,7 +64,7 @@ class Fetcher:
 
 def run_loop():
   loop = asyncio.get_event_loop()
-  fetcher = Fetcher('xkcd.com', '/', loop)
+  fetcher = Fetcher('oracle.code-life.info', '/', loop)
   loop.run_until_complete(fetcher.fetch())
 
 

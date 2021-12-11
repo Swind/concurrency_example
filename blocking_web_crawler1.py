@@ -4,6 +4,10 @@ import ssl
 import pprint
 import time
 
+"""
+使用傳統的 socket 去取得 https://oracle.code-life.info/ 的內容
+"""
+
 def fetch(hostname: str, url: str):
   start_time = time.time()
 
@@ -19,7 +23,7 @@ def fetch(hostname: str, url: str):
   ssl_sock.connect((hostname, 443))
 
   # Send request
-  ssl_sock.sendall("GET {} HTTP/1.0\r\nHost: xkcd.com\r\n\r\n".format(url).encode('ascii'))
+  ssl_sock.sendall("GET {} HTTP/1.0\r\nHost: {}\r\n\r\n".format(url, hostname).encode('ascii'))
   response = b''
   chunk = ssl_sock.recv(4096)
 

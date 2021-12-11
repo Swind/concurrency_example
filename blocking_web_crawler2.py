@@ -59,7 +59,7 @@ class Fetcher:
 
 
 if __name__ == '__main__':
-  #fetcher = Fetcher('oracle.code-life.info', '/')
-  fetcher = Fetcher('github.com', '/')
+  fetcher = Fetcher('oracle.code-life.info', '/')
+  #fetcher = Fetcher('github.com', '/')
   urls = fetcher.fetch()
   #pprint.pprint(urls)

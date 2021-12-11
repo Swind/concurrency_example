@@ -7,6 +7,10 @@ import time
 from urllib.parse import urljoin
 import pprint
 
+"""
+使用 python 內建的 asyncio 分析 oracle.code-life.info 底下所有的網頁
+"""
+
 debug = False
 
 def log(message):

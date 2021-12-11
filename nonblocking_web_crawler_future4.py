@@ -196,8 +196,10 @@ class Loop:
 
 
 if __name__ == '__main__':
+  start_time = time.time()
   loop = Loop()
   crawler = Crawler('oracle.code-life.info', loop)
   crawler.start('/')
   loop.run()
-  pprint.pprint(crawler.urls)
+  end_time = time.time()
+  print(f"time {end_time - start_time}")

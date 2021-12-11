@@ -5,6 +5,12 @@ import selectors
 
 stopped = False
 
+"""
+nonblocking socket + yield 架構
+加入 Task 與 Future
+只有實做完 connect 的版本
+"""
+
 
 def parse_links(response):
   return set(
@@ -85,6 +91,6 @@ def loop(selector):
 if __name__ == '__main__':
   selector = selectors.DefaultSelector()
 
-  fetcher = Fetcher('xkcd.com', '/', selector)
+  fetcher = Fetcher('oracle.code-life.info', '/', selector)
   Task(fetcher.fetch())
   loop(selector)

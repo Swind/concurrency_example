@@ -6,6 +6,9 @@ import threading
 
 import time
 
+"""
+使用 Blocking socket + Multiple thread 分析 oracle.code-life.info 底下所有的網頁
+"""
 
 def create_ssl_socket(hostname):
   # SSL
